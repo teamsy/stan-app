@@ -7,9 +7,9 @@
 [docker-compose](https://docs.docker.com/compose/install/)
   
 
-## CREATE NEW PROJET
+## Init project
 
-- Create new projet react native app
+- Default project is Stan
 ```
 $ docker-compose run web create-react-native-app stan-app
 ```
