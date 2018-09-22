@@ -19,7 +19,7 @@ help:
 
 start:				## Install and start the project. usage: make start user=$USER
 start: web/built desactived/adb
-	$(EXEC) $(CONTAINER_NAME) $(BASH_EXEC) "react-native init stan && chown -R $(USER) stan/ && cd stan/ && npm install"
+	$(EXEC) $(CONTAINER_NAME) $(BASH_EXEC) "react-native init stan && cd stan/ && npm install"
 
 startApp:			## Run Npm start usage: make startApp appname=arg
 startApp:
