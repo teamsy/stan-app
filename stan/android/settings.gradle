@@ -1,0 +1,3 @@
+rootProject.name = 'stan'
+
+include ':app'
