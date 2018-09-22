@@ -20,7 +20,7 @@ help:
 start:				## Install and start the project. usage: make start user=$USER
 start: web/built desactived/adb
 	$(EXEC) $(CONTAINER_NAME) $(BASH_EXEC) "react-native init stan && cd stan/ && npm install"
-	sudo chown -R $(USER) stan
+	
 
 startApp:			## Run Npm start usage: make startApp appname=arg
 startApp:
