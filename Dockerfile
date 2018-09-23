@@ -1,6 +1,5 @@
 # Pull base image.
 FROM ubuntu:16.04
-ARG user
 
 # Install base software packages
 RUN apt-get update && \
@@ -32,8 +31,6 @@ RUN \
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 
-# Define USER env
-ENV USER=$user
 
 # ——————————
 # Installs i386 architecture required for running 32 bit Android tools
