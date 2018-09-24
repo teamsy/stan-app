@@ -20,11 +20,11 @@ help:
 start:				## Install and start the project. usage: make start user=$USER
 start: web/built desactived/adb
 	$(EXEC) $(CONTAINER_NAME) $(BASH_EXEC) "react-native init stan && cd stan/ && npm install"
-	sudo chown -R $(USER) stan
 
-startApp:			## Run Npm start usage: make startApp appname=arg
+startApp:			## start the container and the app usage: make startApp appname=arg
 startApp:
-	$(EXEC) $(CONTAINER_NAME) $(BASH_EXEC) "cd $(PROJECT_NAME) && npm start"
+	docker start $(CONTAINER_NAME) && make runAndroid appname=$(PROJECT_NAME)
+	
 
 createApp:			## Create App usage: make createApp appname=arg
 createApp:
@@ -40,16 +40,29 @@ runIos:				## Run Ios usage: make runIos appname=arg
 runIos:
 	$(EXEC) $(CONTAINER_NAME) $(BASH_EXEC) "cd $(PROJECT_NAME) && react-native run-ios"
 
+runAndroidLog:			## Run Android Log usage: make runAndroidLog appname=arg
+runAndroidLog:
+	$(EXEC) $(CONTAINER_NAME) $(BASH_EXEC) "cd $(PROJECT_NAME) && react-native log-android"
 
 
+runIosLog:			## Run Ios Log usage: make runIosLog appname=arg
+runIosLog:
+	$(EXEC) $(CONTAINER_NAME) $(BASH_EXEC) "cd $(PROJECT_NAME) && react-native log-android"
 
 
+startAppOnNewPc:			## Create and start a new container and start the app usage: make startApp appname=arg 
+startAppOnNewPc: build web/built desactived/adb
+	$(EXEC) $(CONTAINER_NAME) $(BASH_EXEC) "cd $(PROJECT_NAME) && npm install && react-native run-android"
 
 
+startNpm:			## Run Npm start usage: make startNpm appname=arg
+startNpm:
+	$(EXEC) $(CONTAINER_NAME) $(BASH_EXEC) "cd $(PROJECT_NAME) && npm start"
 
 
-
-
+dockerStop:			## Stop the container usage: make dockerStop
+dockerStop:
+	docker stop $(CONTAINER_NAME)
 
 
 
