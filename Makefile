@@ -4,6 +4,7 @@ FIG=docker run
 EXEC=docker exec -it
 BASH_EXEC=/bin/bash -c
 PROJECT_NAME=${appname}
+USER=${user}
 
 .PHONY: help start createApp runAndroid runIos
 .PHONY: build web/built start/app
@@ -19,6 +20,7 @@ help:
 start:				## Install and start the project. usage: make start user=$USER
 start: web/built desactived/adb
 	$(EXEC) $(CONTAINER_NAME) $(BASH_EXEC) "react-native init stan && cd stan/ && npm install"
+	sudo chown -R $(USER) stan
 
 startApp:			## Run Npm start usage: make startApp appname=arg
 startApp:
@@ -57,7 +59,7 @@ desactived/adb:
 	adb kill-server
 
 build:
-	docker build -t react-cli .
+	docker build --build-arg user=$(USER) -t react-cli .
 
 web/built: build
 	$(FIG) -it -d --privileged -v $(PWD):/app -v /dev/bus/usb:/dev/bus/usb --name=react-cli react-cli
